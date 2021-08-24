@@ -32,25 +32,25 @@ public final class RemoteFeedLoader: FeedLoader {
 			}
 		}
 	}
-	
+
 	private struct Root: Decodable {
 		private let images: [Image]
-		
+
 		var feedImages: [FeedImage] {
 			return images.map { $0.image }
 		}
-		
+
 		enum CodingKeys: String, CodingKey {
 			case images = "items"
 		}
 	}
-	
+
 	private struct Image: Decodable {
 		private let id: UUID
 		private let description: String?
 		private let location: String?
 		private let url: URL
-		
+
 		var image: FeedImage {
 			return FeedImage(
 				id: id,
@@ -59,7 +59,7 @@ public final class RemoteFeedLoader: FeedLoader {
 				url: url
 			)
 		}
-		
+
 		enum CodingKeys: String, CodingKey {
 			case id = "image_id"
 			case description = "image_desc"
